@@ -12,6 +12,6 @@ end)
 
 require('telescope').setup({
     defaults = {
-        file_ignore_patterns = {"env", "\\.git", "__pycache__", "\\.venv", "\\.vscode", "\\.cache", "\\.pytest_cache", "\\.mypy_cache", "\\.tox", ".eggs", "node_modules" }
+        file_ignore_patterns = {"env/", "\\.git", "__pycache__", "\\.venv", "\\.vscode", "\\.cache", "\\.pytest_cache", "\\.mypy_cache", "\\.tox", ".eggs", "node_modules" }
     }
 })
