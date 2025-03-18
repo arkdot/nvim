@@ -55,15 +55,17 @@ lsp_config.lua_ls.setup({
 lsp_config.pylsp.setup({
     on_attach = on_attach,
     capabilities = capabilities,
+    settings = {
+        pylsp = {
+            plugins = {
+                pycodestyle = {enabled = false}, -- let ruff do the job
+            }
+        }
+    },
 })
 
 lsp_config.ruff.setup({
     on_attach = on_attach,
-    init_options = {
-        settings = {
-          lineLength = 100
-        }
-    }
 })
 
 
