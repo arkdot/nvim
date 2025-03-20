@@ -58,7 +58,7 @@ lsp_config.pylsp.setup({
     settings = {
         pylsp = {
             plugins = {
-                pycodestyle = {enabled = false}, -- let ruff do the job
+                pycodestyle = {enabled = true},
             }
         }
     },
