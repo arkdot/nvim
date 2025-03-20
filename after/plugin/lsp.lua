@@ -60,7 +60,7 @@ lsp_config.pylsp.setup({
             plugins = {
                 pycodestyle = {
                     enabled = true,
-                    ignore = {"W503"},
+                    ignore = {"W503", "E501"},
                 },
             }
         }
