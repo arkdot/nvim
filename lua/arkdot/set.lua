@@ -35,8 +35,8 @@ vim.opt.incsearch = true
 -- Always at least 8 lines above and below the cursor
 vim.opt.scrolloff = 8
 
--- Vertical line at 80
-vim.opt.colorcolumn = "80"
+-- Vertical line at 110 characters
+vim.opt.colorcolumn = "110"
 
 
 -- Reserve a space in the gutter.
