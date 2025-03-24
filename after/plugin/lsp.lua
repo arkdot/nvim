@@ -59,8 +59,11 @@ lsp_config.pylsp.setup({
         pylsp = {
             plugins = {
                 pycodestyle = {
-                    enabled = true,
+                    enabled = false,
                     ignore = {"W503"},
+                },
+                pyflakes = {
+                    enabled = false,
                 },
             }
         }
