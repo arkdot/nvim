@@ -8,6 +8,7 @@ require("mason-lspconfig").setup({
         "ruff",
         "rust_analyzer",
         "yamlls",
+        "ts_ls",
     }
 })
 
@@ -87,6 +88,11 @@ lsp_config.yamlls.setup({
 })
 
 lsp_config.rust_analyzer.setup({
+    on_attach = on_attach
+})
+
+
+lsp_config.ts_ls.setup({
     on_attach = on_attach
 })
 
