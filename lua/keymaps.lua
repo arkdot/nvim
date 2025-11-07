@@ -1,0 +1,18 @@
+-- Restart nvim
+vim.keymap.set("n", "<leader>R", "<cmd>restart<CR>")
+
+-- Cursor doesn't move when merging lines
+vim.keymap.set("n", "J", "mzJ`z")
+
+-- Keeping the cursor centered.
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Scroll downwards' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Scroll upwards' })
+vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Next result' })
+vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Previous result' })
+
+-- Copy to system/vi buffer
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
+
+-- Clear highlights on search when pressing <Esc> in normal mode
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")

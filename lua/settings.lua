@@ -1,11 +1,12 @@
 -- Leader is space
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Fat cursor
 vim.opt.guicursor = ""
 
 -- Line numbering
-vim.opt.nu = true
+vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- Indent with 4 spaces
@@ -27,10 +28,6 @@ vim.opt.undofile = true
 -- Search is case-sensitive only if search string contains an uppercase character
 vim.opt.smartcase = true
 vim.opt.ignorecase = true
-
--- Highlight search during the search, not after
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
 
 -- Always at least 8 lines above and below the cursor
 vim.opt.scrolloff = 8
@@ -54,7 +51,6 @@ vim.opt.updatetime = 50
 
 -- Nice colors.
 vim.opt.termguicolors = true
-vim.cmd("colorscheme rose-pine")
 
 
 -- Set file type based on extension.
@@ -69,10 +65,10 @@ vim.cmd([[
 
 -- Hightlight yanked text.
 vim.api.nvim_create_autocmd('TextYankPost', {
-    group = vim.api.nvim_create_augroup('highlight_yank', {}),
     desc = 'Hightlight selection on yank',
+    group = vim.api.nvim_create_augroup('highlight_yank', { clear = true }),
     pattern = '*',
     callback = function()
-        vim.highlight.on_yank { higroup = 'IncSearch', timeout = 200 }
+        vim.highlight.on_yank { timeout = 200 }
     end,
 })
