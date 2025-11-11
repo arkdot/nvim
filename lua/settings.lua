@@ -1,8 +1,7 @@
 -- Set <space> as the leader key.
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used).
 vim.g.mapleader = " "
-vim.g.maplocalleader = " " 
-
+vim.g.maplocalleader = " "
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = "a"
@@ -30,7 +29,6 @@ vim.cmd([[
   autocmd FileType html,htmldjango,css,javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 ]])
 
-
 -- Do not wrap lines
 vim.opt.wrap = false
 
@@ -54,3 +52,6 @@ vim.o.updatetime = 250
 
 -- Decrease mapped sequence wait time.
 vim.o.timeoutlen = 300
+
+-- Use true colors
+vim.o.termguicolors = true
