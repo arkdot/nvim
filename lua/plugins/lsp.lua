@@ -59,8 +59,6 @@ return {
         --  the definition of its *type*, not where it was *defined*.
         map("<leader>gt", "<cmd> FzfLua lsp_typedefs<cr>", "[G]oto [T]ype Definition")
 
-        map("<leader>od", vim.diagnostic.open_float, "[O]pen [D]iagnostics")
-
         -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
         local function client_supports_method(client, method, bufnr)
           if vim.fn.has("nvim-0.11") == 1 then
@@ -78,7 +76,7 @@ return {
           client
           and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf)
         then
-          local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
+          local highlight_augroup = vim.api.nvim_create_augroup("arkdot-lsp-highlight", { clear = false })
           vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
             buffer = event.buf,
             group = highlight_augroup,
@@ -92,10 +90,10 @@ return {
           })
 
           vim.api.nvim_create_autocmd("LspDetach", {
-            group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
+            group = vim.api.nvim_create_augroup("arkdot-lsp-detach", { clear = true }),
             callback = function(event2)
               vim.lsp.buf.clear_references()
-              vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
+              vim.api.nvim_clear_autocmds({ group = "arkdot-lsp-highlight", buffer = event2.buf })
             end,
           })
         end
@@ -112,35 +110,6 @@ return {
       end,
     })
 
-    -- Diagnostic Config
-    -- See :help vim.diagnostic.Opts
-    vim.diagnostic.config({
-      severity_sort = true,
-      float = { border = "rounded", source = "if_many" },
-      underline = { severity = vim.diagnostic.severity.ERROR },
-      signs = vim.g.have_nerd_font and {
-        text = {
-          [vim.diagnostic.severity.ERROR] = "󰅚 ",
-          [vim.diagnostic.severity.WARN] = "󰀪 ",
-          [vim.diagnostic.severity.INFO] = "󰋽 ",
-          [vim.diagnostic.severity.HINT] = "󰌶 ",
-        },
-      } or {},
-      virtual_text = {
-        source = "if_many",
-        spacing = 2,
-        format = function(diagnostic)
-          local diagnostic_message = {
-            [vim.diagnostic.severity.ERROR] = diagnostic.message,
-            [vim.diagnostic.severity.WARN] = diagnostic.message,
-            [vim.diagnostic.severity.INFO] = diagnostic.message,
-            [vim.diagnostic.severity.HINT] = diagnostic.message,
-          }
-          return diagnostic_message[diagnostic.severity]
-        end,
-      },
-    })
-
     -- LSP servers and clients are able to communicate to each other what features they support.
     local capabilities = require("blink.cmp").get_lsp_capabilities()
 
@@ -152,18 +121,21 @@ return {
             completion = {
               callSnippet = "Replace",
             },
+            diagnostics = {
+              globals = { "vim" },
+            },
           },
         },
       },
 
       pylsp = {
-        plugins = {
-          pycodestyle = {
-            enabled = false,
-            ignore = { "W503" },
-          },
-          pyflakes = {
-            enabled = false,
+        settings = {
+          pylsp = {
+            plugins = {
+              pycodestyle = { enabled = false },
+              pyflakes = { enabled = true },
+              pycodespylint = { enabled = true },
+            },
           },
         },
       },
@@ -181,15 +153,13 @@ return {
     require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
     require("mason-lspconfig").setup({
-      ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+      ensure_installed = {}, -- explicitly set to an empty table (using mason-tool-installer instead)
       automatic_installation = false,
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-          require("lspconfig")[server_name].setup(server)
-        end,
-      },
     })
+
+    for server_name, config in pairs(servers) do
+      config.capabilities = vim.tbl_deep_extend("force", {}, capabilities, config.capabilities or {})
+      vim.lsp.config(server_name, config)
+    end
   end,
 }

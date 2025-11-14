@@ -16,3 +16,6 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- Clear highlights on search when pressing <Esc> in normal mode.
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+-- Open diagnostics in a floating window
+vim.keymap.set("n", "<leader>od", vim.diagnostic.open_float, { desc = "[O]pen [D]iagnostics" })
