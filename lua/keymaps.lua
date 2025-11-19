@@ -19,3 +19,10 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Open diagnostics in a floating window
 vim.keymap.set("n", "<leader>od", vim.diagnostic.open_float, { desc = "[O]pen [D]iagnostics" })
+
+-- Replace string in a file
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { silent = false })
+
+-- Paste over selection preserving the clipboard
+vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste over selection" })
+
