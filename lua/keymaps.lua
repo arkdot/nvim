@@ -5,8 +5,8 @@ vim.keymap.set("n", "<leader>R", "<cmd>restart<CR>")
 vim.keymap.set("n", "J", "mzJ`z")
 
 -- Keeping the cursor centered.
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll downwards" })
-vim.keymap.set("n", "<C-s>", "<C-u>zz", { desc = "Scroll upwards" })
+vim.keymap.set({"n", "v"}, "<C-d>", "<C-d>zz", { desc = "Scroll downwards" })
+vim.keymap.set({"n", "v"}, "<C-s>", "<C-u>zz", { desc = "Scroll upwards" })
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next result" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous result" })
 
