@@ -8,6 +8,11 @@ return {
         end
     },
     {
+        "catppuccin/nvim",
+        name = "catpuccin",
+        priority = 1000,
+    },
+    {
         "rose-pine/neovim",
         name = "rose-pine",
         config = function()
