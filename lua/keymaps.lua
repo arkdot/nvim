@@ -29,3 +29,5 @@ vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- Paste over selection preserving the clipboard
 vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste over selection" })
 
+-- Write all buffers
+vim.keymap.set("n", "<leader>w", ":wa<CR>", { silent = false })
