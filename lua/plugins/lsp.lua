@@ -48,16 +48,22 @@ return {
 
         -- Fuzzy find all the symbols in your current document.
         --  Symbols are things like variables, functions, types, etc.
-        map("<leader>ds", "<cmd>FzfLua lsp_document_symbols<cr>", "Open [D]ocument [S]ymbols")
+        map("<leader>ds", function()
+          require("fzf-lua").lsp_document_symbols()
+        end, "Open [D]ocument [S]ymbols")
 
         -- Fuzzy find all the symbols in your current workspace.
         --  Similar to document symbols, except searches over your entire project.
-        map("<leader>ws", "<cmd>FzfLua lsp_live_workspace_symbols<cr>", "Open [W]orkspace [S]ymbols")
+        map("<leader>ws", function()
+          require("fzf-lua").lsp_live_workspace_symbols()
+        end, "Open [W]orkspace [S]ymbols")
 
         -- Jump to the type of the word under your cursor.
         --  Useful when you"re not sure what type a variable is and you want to see
         --  the definition of its *type*, not where it was *defined*.
-        map("<leader>gt", "<cmd> FzfLua lsp_typedefs<cr>", "[G]oto [T]ype Definition")
+        map("<leader>gt", function()
+          require("fzf-lua").lsp_typedefs()
+        end, "[G]oto [T]ype Definition")
 
         -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
         local function client_supports_method(client, method, bufnr)
